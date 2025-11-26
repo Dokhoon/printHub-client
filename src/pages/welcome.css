@@ -1,0 +1,109 @@
+/* MAIN CONTAINER */
+.welcome-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+/* HEADER */
+.welcome-header {
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  right: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-logo {
+  width: 60px;
+}
+
+.welcome-header nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.welcome-header nav a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #444;
+  font-weight: 600;
+}
+
+/* CART ICON */
+.cart-icon svg {
+  font-size: 22px;
+  color: #444;
+  transition: 0.3s ease;
+}
+
+.cart-icon:hover svg {
+  transform: scale(1.15);
+  color: black;
+}
+
+/* LEFT CONTENT */
+.welcome-content {
+  flex: 1;
+  padding: 160px 60px;  /* <-- moved down */
+}
+
+.welcome-content h2 {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.welcome-content p {
+  font-size: 20px;
+  color: #585858;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+/* Browse Button */
+.browse-btn {
+  padding: 12px 25px;
+  background: #7f8c8d;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+/* SOCIAL ICONS */
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+/* RIGHT SIDE FULL IMAGE */
+.welcome-side {
+  width: 45%;
+  height: 100%;
+}
+
+.welcome-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

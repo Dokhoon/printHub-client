@@ -1,0 +1,208 @@
+/* Container */
+.reg-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* LEFT SIDE */
+.reg-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f4f4;
+}
+
+/* CARD */
+.reg-card {
+  width: 90%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px 20px; /* smaller padding */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+
+.reg-logo {
+  width: 60px;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.reg-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* FORM INPUTS */
+.reg-form input {
+  width: 100%;
+  padding: 12px;  /* smaller padding */
+  margin-bottom: 12px; /* smaller gap */
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #f7f7f7;
+}
+
+
+.reg-form input:focus {
+  border-color: #7f8c8d;
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(127,140,141,0.2);
+}
+
+/* Gender */
+.reg-label {
+  font-weight: 600;
+  margin-bottom: 3px; /* was 5px */
+  display: block;
+}
+
+.gender-row {
+  gap: 15px; /* was 25px */
+  margin-bottom: 12px; /* was 18px */
+  font-size: 14px;
+}
+
+.gender-row input[type="radio"] {
+  margin-right: 6px;
+}
+
+/* BUTTONS */
+.signup-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #7f8c8d;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.signup-btn:hover {
+  background: #6c7a7b;
+}
+
+/* SOCIAL LOGIN */
+.or {
+  text-align: center;
+  margin: 20px 0 10px 0;
+  font-size: 13px;
+  color: #888;
+}
+.social-login {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+.social-btn.google:hover {
+  background: #f1f1f1;
+}
+.social-btn.apple:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* LOGIN LINK */
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+/* RIGHT SIDE IMAGE */
+.reg-right {
+  width: 50%;
+  height: 100vh;
+}
+.reg-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(85%);
+  transition: transform 0.5s ease;
+}
+.reg-right img:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .reg-container {
+    flex-direction: column;
+  }
+  .reg-left {
+    width: 100%;
+    padding: 20px;
+  }
+  .reg-right {
+    display: none;
+  }
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  appearance: none; /* remove default style */
+  width: 18px;
+  height: 18px;
+  border: 2px solid #7f8c8d;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terms-checkbox input[type="checkbox"]:checked {
+  background-color: #7f8c8d;
+  border-color: #7f8c8d;
+}
+
+.terms-checkbox input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  color: white;
+  font-size: 14px;
+}
+
+.terms-checkbox label {
+  cursor: pointer;
+  color: #555;
+}
+
+.terms-checkbox label a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.terms-checkbox label a:hover {
+  text-decoration: underline;
+}

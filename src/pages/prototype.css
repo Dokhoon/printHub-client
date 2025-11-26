@@ -1,0 +1,47 @@
+:root {
+
+  --muted-gray: #f4f4f4;
+
+}
+ 
+html,body,#root {
+
+  height: 100%;
+
+}
+ 
+.prototype-app .row { height: 100vh; }
+ 
+.main-page .logo { width: 48px; height: 48px; }
+ 
+.hero { height: calc(100vh - 64px); overflow: hidden; }
+
+.hero img { object-fit: cover; height: 100%; width: 100%; filter: grayscale(90%) brightness(60%); }
+ 
+.hero-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+
+.hero-overlay h2 { font-weight: 600; font-size: 22px; color: rgba(255,255,255,0.95); text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+
+.hero-overlay p { color: rgba(255,255,255,0.9); }
+ 
+.login-page { background: #f1efee; position: relative; }
+
+.login-card { width: 80%; max-width: 380px; background: #fff; border-radius: 6px; padding: 22px 0; margin: 40px auto; }
+
+.login-card .logo { width: 40px; height: 40px; }
+ 
+.login-side-image { position: absolute; right: 0; top: 0; bottom: 0; width: 220px; }
+
+.login-side-image img { object-fit: cover; }
+ 
+/* Small screen adjustments to stack layout like the prototype's mobile view */
+
+@media (max-width: 768px) {
+
+  .prototype-app .col-8, .prototype-app .col-4 { flex: 0 0 100%; max-width: 100%; }
+
+  .login-side-image { display: none !important; }
+
+}
+
+ 

@@ -1,0 +1,37 @@
+.terms-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.terms-container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.terms-container header h2 {
+  margin: 0;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.terms-container main ol {
+  padding-left: 20px;
+}
+
+.terms-container main li {
+  margin-bottom: 10px;
+}

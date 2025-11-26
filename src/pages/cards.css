@@ -1,0 +1,159 @@
+.cards-body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* HEADER: full width at top */
+.cards-header {
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: sticky; /* stays on top */
+  top: 0;
+  z-index: 100;
+}
+.cards-logo {
+  width: 60px;
+}
+.cards-header nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.cards-header nav a:hover {
+  color: #7f8c8d;
+}
+
+/* MAIN CONTENT: below header */
+.cards-content {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 70px); /* full height minus header */
+}
+
+/* LEFT CARDS SECTION */
+.cards-page {
+  width: 55%;
+  padding: 40px 50px;
+  background: #f4f4f4;
+  overflow-y: auto; /* scroll if too many cards */
+}
+.cards-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+.card-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* CARD STYLING */
+.card-box {
+  width: 200px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+.card-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.cards-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px; /* 🔥 adds space below the dropdown */
+}
+
+.filter-dropdown {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.qty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.qty button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.add-btn {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-radius: 12px;
+  background: #7f8c8d;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.add-btn:hover {
+  background: #6c7a7b;
+}
+
+/* RIGHT SIDE IMAGE */
+.side-img {
+  width: 45%;
+  height: 100%;
+  overflow: hidden;
+}
+.side-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(90%);
+  transition: transform 0.5s ease;
+}
+.side-img img:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .cards-content {
+    flex-direction: column;
+    height: auto;
+  }
+  .cards-page {
+    width: 100%;
+    padding: 20px;
+  }
+  .side-img {
+    display: none;
+  }
+  .card-row {
+    justify-content: center;
+  }
+}
