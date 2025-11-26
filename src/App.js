@@ -10,6 +10,9 @@ import CartPage from "./pages/CartPage";
 import ConfirmPage from "./pages/ConfirmPage";
 import WelcomePage from "./pages/WelcomePage";
 import TermsPage from "./pages/TermsPage";
+import AdminDashboard from "./admin/AdminDashboard";
+import UserManagement from "./admin/UserManagement";
+import OrderManagement from "./admin/OrderManagement";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<UserManagement />} />
+          <Route path="/admin/orders" element={<OrderManagement />} />
         </Routes>
       </div>
     </Router>
