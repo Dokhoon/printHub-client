@@ -1,9 +1,9 @@
-.cards-body {
+.search-body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* HEADER: full width at top */
-.cards-header {
+/* HEADER */
+.search-header {
   width: 100%;
   height: 70px;
   background: #fff;
@@ -12,44 +12,56 @@
   justify-content: space-between;
   padding: 0 50px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  position: sticky; 
+  position: sticky;
   top: 0;
   z-index: 100;
 }
-.cards-logo {
+.search-logo {
   width: 60px;
 }
-.cards-header nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.3s;
+.search-header nav {
+  display: flex;
+  align-items: center;
 }
-.cards-header nav a:hover {
-  color: #7f8c8d;
+.go-back-btn {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f4f4f4;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 20px;
+  transition: background 0.3s;
+}
+.go-back-btn:hover {
+  background: #e0e0e0;
 }
 
-/* MAIN CONTENT: below header */
-.cards-content {
+/* MAIN CONTENT */
+.search-content {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 70px); 
+  height: calc(100vh - 70px);
 }
 
 /* LEFT CARDS SECTION */
-.cards-page {
+.search-results {
   width: 55%;
   padding: 40px 50px;
   background: #f4f4f4;
-  overflow-y: auto; /* scroll if too many cards */
+  overflow-y: auto;
 }
-.cards-title {
+.search-results h2 {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 30px;
   color: #333;
 }
+.keyword {
+  color: #7f8c8d;
+}
+
+/* CARDS GRID */
 .card-row {
   display: flex;
   gap: 30px;
@@ -78,35 +90,13 @@
   border-radius: 15px;
   margin-bottom: 10px;
 }
-
-.cards-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px; 
+.stock-text {
+  font-size: 14px;
+  margin: 5px 0;
 }
-
-.filter-dropdown {
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.qty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.price-text {
+  font-weight: 600;
   margin-bottom: 10px;
-}
-.qty button {
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  cursor: pointer;
 }
 .add-btn {
   width: 100%;
@@ -142,11 +132,11 @@
 
 /* RESPONSIVE */
 @media (max-width: 992px) {
-  .cards-content {
+  .search-content {
     flex-direction: column;
     height: auto;
   }
-  .cards-page {
+  .search-results {
     width: 100%;
     padding: 20px;
   }
@@ -157,5 +147,3 @@
     justify-content: center;
   }
 }
-
-

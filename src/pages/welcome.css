@@ -2,62 +2,150 @@
 .welcome-container {
   display: flex;
   height: 100vh;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   background: #f8f8f8;
+  position: relative;
+
+  /* fade-in animation */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.welcome-container.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* HEADER */
 .welcome-header {
   position: absolute;
-  top: 15px;
-  left: 30px;
-  right: 30px;
-
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  opacity: 0;
+  animation: fadeInHeader 0.6s forwards 0.2s;
 }
 
+@keyframes fadeInHeader {
+  to { opacity: 1; }
+}
+
+/* LOGO */
 .welcome-logo {
   width: 60px;
+  flex-shrink: 0;
 }
 
+/* SEARCH BAR */
+.welcome-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.welcome-search input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.welcome-search input:focus {
+  border-color: #7f8c8d;
+  box-shadow: 0 0 10px rgba(127, 140, 141, 0.3);
+}
+
+.welcome-search button {
+  padding: 10px 18px;
+  background: #7f8c8d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.welcome-search button:hover {
+  background: #6c7a7b;
+  transform: scale(1.05);
+}
+
+/* NAV */
 .welcome-header nav {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 20px;
 }
 
-.welcome-header nav a {
+.welcome-header nav a,
+.logout-btn {
   text-decoration: none;
   font-size: 16px;
   color: #444;
   font-weight: 600;
+  transition: color 0.3s, transform 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.welcome-header nav a:hover,
+.logout-btn:hover {
+  color: #000;
+  transform: scale(1.05);
 }
 
 /* CART ICON */
 .cart-icon svg {
   font-size: 22px;
   color: #444;
-  transition: 0.3s ease;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .cart-icon:hover svg {
-  transform: scale(1.15);
-  color: black;
+  transform: scale(1.2);
+  color: #000;
 }
 
 /* LEFT CONTENT */
 .welcome-content {
   flex: 1;
-  padding: 160px 60px;  /* <-- moved down */
+  padding: 180px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInContent 0.8s forwards 0.4s;
+}
+
+@keyframes fadeInContent {
+  to { opacity: 1; }
 }
 
 .welcome-content h2 {
   font-size: 38px;
   font-weight: 700;
   margin-bottom: 20px;
+  color: #333;
 }
 
 .welcome-content p {
@@ -76,34 +164,103 @@
   border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 600;
   margin-bottom: 40px;
+  transition: all 0.3s ease;
+}
+
+.browse-btn:hover {
+  background: #6c7a7b;
+  transform: scale(1.05);
 }
 
 /* SOCIAL ICONS */
 .socials {
   display: flex;
   gap: 20px;
+  opacity: 0;
+  animation: fadeInSocials 1s forwards 0.8s;
+}
+
+@keyframes fadeInSocials {
+  to { opacity: 1; }
 }
 
 .social-icon {
   font-size: 28px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
 .social-icon:hover {
   transform: scale(1.2);
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
-/* RIGHT SIDE FULL IMAGE */
+/* RIGHT SIDE IMAGE */
 .welcome-side {
   width: 45%;
   height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .welcome-side img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(90%);
+  transition: transform 0.6s ease;
+}
+
+.welcome-side img:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .welcome-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .welcome-header {
+    flex-direction: column;
+    gap: 15px;
+    top: 10px;
+    padding: 15px 20px;
+  }
+
+  .welcome-search {
+    width: 100%;
+  }
+
+  .welcome-content {
+    padding: 120px 30px;
+    text-align: center;
+  }
+
+  .welcome-side {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .welcome-content h2 {
+    font-size: 28px;
+  }
+
+  .welcome-content p {
+    font-size: 16px;
+  }
+
+  .browse-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .social-icon {
+    font-size: 24px;
+  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./TermsPage.css"; // optional for styling
+import "./TermsPage.css"; 
 
 export default function TermsPage() {
   return (

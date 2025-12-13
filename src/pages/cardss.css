@@ -1,7 +1,7 @@
 .cards-body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+ 
 /* HEADER: full width at top */
 .cards-header {
   width: 100%;
@@ -12,7 +12,7 @@
   justify-content: space-between;
   padding: 0 50px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  position: sticky; 
+  position: sticky; /* stays on top */
   top: 0;
   z-index: 100;
 }
@@ -29,14 +29,14 @@
 .cards-header nav a:hover {
   color: #7f8c8d;
 }
-
+ 
 /* MAIN CONTENT: below header */
 .cards-content {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 70px); 
+  height: calc(100vh - 70px); /* full height minus header */
 }
-
+ 
 /* LEFT CARDS SECTION */
 .cards-page {
   width: 55%;
@@ -55,7 +55,7 @@
   gap: 30px;
   flex-wrap: wrap;
 }
-
+ 
 /* CARD STYLING */
 .card-box {
   width: 200px;
@@ -78,14 +78,14 @@
   border-radius: 15px;
   margin-bottom: 10px;
 }
-
+ 
 .cards-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px; 
 }
-
+ 
 .filter-dropdown {
   padding: 10px 15px;
   border-radius: 8px;
@@ -94,7 +94,7 @@
   font-size: 15px;
   cursor: pointer;
 }
-
+ 
 .qty {
   display: flex;
   justify-content: center;
@@ -122,7 +122,7 @@
 .add-btn:hover {
   background: #6c7a7b;
 }
-
+ 
 /* RIGHT SIDE IMAGE */
 .side-img {
   width: 45%;
@@ -139,7 +139,7 @@
 .side-img img:hover {
   transform: scale(1.05);
 }
-
+ 
 /* RESPONSIVE */
 @media (max-width: 992px) {
   .cards-content {
@@ -157,5 +157,7 @@
     justify-content: center;
   }
 }
-
-
+ 
+ 
+ 
+ 

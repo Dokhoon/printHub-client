@@ -1,118 +1,134 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./cards.css";
-
-import gradu from '../assets/gradu.png';
-import birthday from '../assets/birthday.png';
-import welcome from '../assets/welcome.png';
-import flowers from '../assets/flowers.png';
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+import { FiShoppingCart } from "react-icons/fi";
 import logo from '../assets/logo.png';
+import flowers from '../assets/flowers.png';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CardsPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const [cards, setCards] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("all");
 
-  const cards = [
-    { title: "Graduation Card", img: gradu, category: "graduation" },
-    { title: "Birthday Card", img: birthday, category: "birthday" },
-    { title: "Welcome Card", img: welcome, category: "welcome" },
-  ];
+
+  // Fetch cards
+  useEffect(() => {
+    fetch("http://localhost:5000/api/cards")
+      .then(res => res.json())
+      .then(data => {
+        setCards(data);
+        // Extract unique categories
+        const uniqueCategories = [...new Set(data.map(c => c.category))];
+        setCategories(uniqueCategories);
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   const filteredCards =
-    category === "all"
-      ? cards
-      : cards.filter((c) => c.category === category);
+    category === "all" ? cards : cards.filter(c => c.category === category);
 
   return (
     <div className="cards-body">
+      <ToastContainer position="top-center" />
 
-      {/* HEADER */}
       <header className="cards-header">
         <img src={logo} className="cards-logo" alt="logo" />
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/login">Log Out</Link>
+          <Link to="/welcome">Home</Link>
+          <Link to="/">Log Out</Link>
+          <FiShoppingCart
+            size={24}
+            style={{ cursor: "pointer", marginLeft: "15px" }}
+            onClick={() => navigate("/cart")}
+          />
         </nav>
       </header>
 
       <div className="cards-content">
-
-        {/* LEFT CONTENT */}
         <div className="cards-page">
-
           <div className="cards-header-row">
             <h2 className="cards-title">Cards</h2>
 
-            {/* CATEGORY DROPDOWN */}
             <select
               className="filter-dropdown"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="all">All Cards</option>
-              <option value="graduation">Graduation</option>
-              <option value="birthday">Birthday</option>
-              <option value="welcome">Welcome</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
             </select>
           </div>
 
-          {/* CARDS */}
           <div className="card-row">
-            {filteredCards.map((card, i) => (
-              <Card
-                key={i}
-                title={card.title}
-                img={card.img}
-                navigate={navigate}
-              />
+            {filteredCards.map(card => (
+              <Card key={card._id} card={card} dispatch={dispatch} />
             ))}
           </div>
-
         </div>
 
-        {/* RIGHT IMAGE */}
         <div className="side-img">
           <img src={flowers} alt="flowers" />
         </div>
-
       </div>
     </div>
   );
 }
 
-/* ---------- CARD COMPONENT ---------- */
+function Card({ card, dispatch }) {
+  const [quantity, setQuantity] = useState(20);
 
-function Card({ title, img, navigate }) {
-  const [quantity, setQuantity] = React.useState(20);
+  const addItemToCart = () => {
+    if (card.stock <= 0) {
+      toast.error("❌ No stock available");
+      return;
+    }
+
+    if (quantity > card.stock) {
+      toast.error("❌ Not enough stock available");
+      return;
+    }
+
+    dispatch(
+      addToCart({
+        id: card._id,
+        title: card.title,
+        unitPrice: card.price, 
+        quantity,
+        imageUrl: card.imageUrl,
+      })
+    );
+
+    toast.success("✅ Added to cart");
+  };
 
   return (
     <div className="card-box">
+      <h3>{card.title}</h3>
+      <img src={card.imageUrl} className="card-image" alt={card.title} />
+      {card.description && <p className="description-text">{card.description}</p>}
+      <p className="price-text">{card.price} OMR / 20 pcs</p>
 
-      <h3>{title}</h3>
-
-      <img src={img} className="card-image" alt={title} />
-
-      <p className="price-text">
-        {quantity} pieces for {quantity / 2} OR
-      </p>
-
-      {/* REMOVE DROPDOWN — using buttons instead */}
       <div className="qty">
-        <button onClick={() => setQuantity(q => Math.max(10, q - 10))}>-</button>
+        <button onClick={() => setQuantity(q => Math.max(20, q - 20))} disabled={card.stock <= 0}>-</button>
         <span>{quantity}</span>
-        <button onClick={() => setQuantity(q => q + 10)}>+</button>
+        <button onClick={() => setQuantity(q => Math.min(q + 20, card.stock))} disabled={card.stock <= 0}>+</button>
       </div>
 
-      <button
-        className="add-btn"
-        onClick={() =>
-          alert(`Added ${quantity} pieces of ${title} to cart`)
-        }
-      >
-        Add to Cart
+      <button className="add-btn" disabled={card.stock <= 0} onClick={addItemToCart}>
+        {card.stock <= 0 ? "No Stock" : "Add to Cart"}
       </button>
-
     </div>
   );
 }
+
+
+

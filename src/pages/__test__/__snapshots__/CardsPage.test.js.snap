@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`📌 Snapshot of CardsPage UI 1`] = `
+<body>
+  <div>
+    <div
+      class="cards-body"
+    >
+      <section
+        aria-atomic="false"
+        aria-label="Notifications Alt+T"
+        aria-live="polite"
+        aria-relevant="additions text"
+        class="Toastify"
+      />
+      <header
+        class="cards-header"
+      >
+        <img
+          alt="logo"
+          class="cards-logo"
+          src="logo.png"
+        />
+        <nav>
+          <a
+            href="/welcome"
+          >
+            Home
+          </a>
+          <a
+            href="/"
+          >
+            Log Out
+          </a>
+          <svg
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            style="cursor: pointer; margin-left: 15px;"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="9"
+              cy="21"
+              r="1"
+            />
+            <circle
+              cx="20"
+              cy="21"
+              r="1"
+            />
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            />
+          </svg>
+        </nav>
+      </header>
+      <div
+        class="cards-content"
+      >
+        <div
+          class="cards-page"
+        >
+          <div
+            class="cards-header-row"
+          >
+            <h2
+              class="cards-title"
+            >
+              Cards
+            </h2>
+            <select
+              class="filter-dropdown"
+            >
+              <option
+                value="all"
+              >
+                All Cards
+              </option>
+              <option
+                value="graduation"
+              >
+                Graduation
+              </option>
+              <option
+                value="birthday"
+              >
+                Birthday
+              </option>
+              <option
+                value="welcome"
+              >
+                Welcome
+              </option>
+            </select>
+          </div>
+          <div
+            class="card-row"
+          >
+            <div
+              class="card-box"
+            >
+              <h3>
+                Birthday Card
+              </h3>
+              <img
+                alt="Birthday Card"
+                class="card-image"
+                src="test.jpg"
+              />
+              <p
+                class="price-text"
+              >
+                1.5
+                 OMR / 20 pcs
+              </p>
+              <div
+                class="qty"
+              >
+                <button>
+                  -
+                </button>
+                <span>
+                  20
+                </span>
+                <button>
+                  +
+                </button>
+              </div>
+              <button
+                class="add-btn"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="side-img"
+        >
+          <img
+            alt="flowers"
+            src="flowers.png"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

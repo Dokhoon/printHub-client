@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../redux/userSlice";
+import { registerUser, clearMessage } from "../redux/userSlice";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import sideCard from "../assets/sideCard.png";
 import "./Registration.css";
 
 export default function Registration() {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.user);
+  const navigate = useNavigate(); 
+  const { loading, error, user, message } = useSelector((state) => state.user);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -30,12 +32,56 @@ export default function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Password match check
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+
+    // Email validation
+    const allowedDomains = ["hotmail.com", "gmail.com", "utas.edu.om"];
+    const emailDomain = formData.email.split("@")[1];
+
+    if (!allowedDomains.includes(emailDomain)) {
+      alert("Email must be from hotmail.com, gmail.com, or utas.edu.om");
+      return;
+    }
+
+
+    // Password strength
+    if (formData.password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
+
+    // Phone validation
+    if (!/^[97]\d{7}$/.test(formData.phone)) {
+      alert("Phone number must be 8 digits and start with 9 or 7");
+      return;
+    }
+
+
+    // Terms checkbox (already required, but double check)
+    if (!formData.termsAccepted) {
+      alert("You must accept the Terms & Conditions");
+      return;
+    }
+
+    // All validations passed → dispatch
     dispatch(registerUser(formData));
   };
+
+
+  // Redirect to /login if registration is successful
+  useEffect(() => {
+  if (message) {
+    alert(message);        
+    navigate("/login");    
+    dispatch(clearMessage()); 
+  }
+}, [message, navigate, dispatch]);
+
 
   return (
     <div className="reg-container">
@@ -65,8 +111,17 @@ export default function Registration() {
             </div>
 
             <div className="terms-checkbox">
-              <input type="checkbox" id="terms" name="termsAccepted" checked={formData.termsAccepted} onChange={handleChange} required />
-              <label htmlFor="terms">I agree to the Terms & Conditions</label>
+              <input
+                type="checkbox"
+                id="terms"
+                name="termsAccepted"
+                checked={formData.termsAccepted}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="terms">
+                I agree to the <Link to="/terms" className="terms-link">Terms & Conditions</Link>
+              </label>
             </div>
 
             <button type="submit" className="signup-btn" disabled={loading}>

@@ -1,14 +1,13 @@
-// redux/userSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// --- Async thunk for user registration ---
+// Register User
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/users", formData);
-      return response.data; // backend returns the created user
+      const res = await axios.post("http://localhost:5000/api/users", formData);
+      return res.data; 
     } catch (err) {
       const message = err.response?.data?.message || err.message || "Failed to register";
       return rejectWithValue({ error: message });
@@ -16,13 +15,16 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// --- Async thunk for user login ---
+// Login User
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
-      return response.data; // backend returns logged in user info + token
+      const res = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      // Save to localStorage
+      if (res.data.token) localStorage.setItem("token", res.data.token);
+      if (res.data.user) localStorage.setItem("user", JSON.stringify(res.data.user));
+      return res.data;
     } catch (err) {
       const message = err.response?.data?.message || err.message || "Failed to login";
       return rejectWithValue({ error: message });
@@ -30,44 +32,56 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// --- Slice ---
+// Load user from localStorage
+const storedUser = localStorage.getItem("user");
+const initialUser = storedUser ? JSON.parse(storedUser) : null;
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: null,
+    user: initialUser,
     loading: false,
     error: null,
+    message: null,
   },
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.error = null;
       state.loading = false;
+      state.error = null;
+      state.message = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+    },
+    clearMessage: (state) => {
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
-    // Register
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.message = null;
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.message = action.payload.message;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload?.error || "Failed to register";
     });
 
-    // Login
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.message = null;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload.user; // Correctly store user object
+      state.message = action.payload.message;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
@@ -76,5 +90,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, clearMessage } = userSlice.actions;
 export default userSlice.reducer;

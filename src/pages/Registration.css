@@ -20,10 +20,19 @@
   max-width: 400px;
   background: #fff;
   border-radius: 15px;
-  padding: 25px 20px; /* smaller padding */
+  padding: 25px 20px; 
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideIn 0.8s forwards;
 }
 
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 .reg-logo {
   width: 60px;
@@ -41,12 +50,13 @@
 /* FORM INPUTS */
 .reg-form input {
   width: 100%;
-  padding: 12px;  /* smaller padding */
-  margin-bottom: 12px; /* smaller gap */
+  padding: 12px;  
+  margin-bottom: 12px; 
   border-radius: 10px;
   border: 1px solid #ddd;
   font-size: 14px;
   background: #f7f7f7;
+  transition: all 0.3s ease;
 }
 
 
@@ -60,13 +70,13 @@
 /* Gender */
 .reg-label {
   font-weight: 600;
-  margin-bottom: 3px; /* was 5px */
+  margin-bottom: 3px; 
   display: block;
 }
 
 .gender-row {
-  gap: 15px; /* was 25px */
-  margin-bottom: 12px; /* was 18px */
+  gap: 15px; 
+  margin-bottom: 12px; 
   font-size: 14px;
 }
 
@@ -86,10 +96,12 @@
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .signup-btn:hover {
   background: #6c7a7b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
 /* SOCIAL LOGIN */
@@ -141,6 +153,9 @@
   object-fit: cover;
   filter: brightness(85%);
   transition: transform 0.5s ease;
+  animation: imageIn 1s forwards 0.5s;
+  opacity: 0;
+  transform: scale(1.1);
 }
 .reg-right img:hover {
   transform: scale(1.05);
@@ -168,7 +183,7 @@
 }
 
 .terms-checkbox input[type="checkbox"] {
-  appearance: none; /* remove default style */
+  appearance: none; 
   width: 18px;
   height: 18px;
   border: 2px solid #7f8c8d;
@@ -176,12 +191,13 @@
   margin-right: 10px;
   position: relative;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .terms-checkbox input[type="checkbox"]:checked {
   background-color: #7f8c8d;
   border-color: #7f8c8d;
+  transform: scale(1.2);
 }
 
 .terms-checkbox input[type="checkbox"]:checked::after {
@@ -206,3 +222,11 @@
 .terms-checkbox label a:hover {
   text-decoration: underline;
 }
+
+@keyframes imageIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
