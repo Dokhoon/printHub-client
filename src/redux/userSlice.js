@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Use environment variable for API URL
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 // Register User
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (formData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/users", formData);
+      const res = await axios.post(`${API_URL}/api/users`, formData);
       return res.data; 
     } catch (err) {
       const message = err.response?.data?.message || err.message || "Failed to register";
@@ -20,7 +23,7 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const res = await axios.post(`${API_URL}/api/users/login`, { email, password });
       // Save to localStorage
       if (res.data.token) localStorage.setItem("token", res.data.token);
       if (res.data.user) localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -80,7 +83,7 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload.user; // Correctly store user object
+      state.user = action.payload.user;
       state.message = action.payload.message;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
