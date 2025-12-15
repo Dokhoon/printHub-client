@@ -8,7 +8,7 @@ import logo from '../assets/logo.png';
 import flowers from '../assets/flowers.png';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BASE_URL from "../../api";
+import BASE_URL from "../api";
 
 
 export default function CardsPage() {

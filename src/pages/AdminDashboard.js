@@ -3,7 +3,7 @@ import { FaUsers, FaClipboardList, FaRegCreditCard } from "react-icons/fa";
 import axios from "axios";
 import "./AdminDashboard.css";
 import { Link, useNavigate } from "react-router-dom";
-import BASE_URL from "../../api";
+import BASE_URL from "../api";
 
 
 export default function AdminDashboard() {

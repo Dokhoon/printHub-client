@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import "./UserManagement.css";
-import BASE_URL from "../../api";
+import BASE_URL from "../api";
  
  
  

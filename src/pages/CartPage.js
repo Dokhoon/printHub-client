@@ -4,7 +4,7 @@ import { removeFromCart, clearCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "./cart.css";
-import BASE_URL from "../../api";
+import BASE_URL from "../api";
 // import { Link } from "react-router-dom";
 
 export default function CartPage() {

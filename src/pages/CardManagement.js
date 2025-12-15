@@ -17,7 +17,7 @@ import {
   FormGroup,
   Label,
 } from "reactstrap";
-import BASE_URL from "../../api";
+import BASE_URL from "../api";
 
 
 
