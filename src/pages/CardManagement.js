@@ -323,6 +323,7 @@ if (!editCardData.category || editCardData.category.trim() === "") {
               ))}
               <option value="new">+ Add New Category</option>
             </Input>
+            
 
             {isAddingCategory && (
               <Input

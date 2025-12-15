@@ -83,19 +83,9 @@ exports[`📌 Snapshot of CardsPage UI 1`] = `
                 All Cards
               </option>
               <option
-                value="graduation"
-              >
-                Graduation
-              </option>
-              <option
                 value="birthday"
               >
-                Birthday
-              </option>
-              <option
-                value="welcome"
-              >
-                Welcome
+                birthday
               </option>
             </select>
           </div>

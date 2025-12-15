@@ -21,7 +21,7 @@ export default function UserManagement() {
  
   const fetchUsers = async () => {
     try {
-const res = axios.get(`${BASE_URL}/api/users`);
+const res = await axios.get(`${BASE_URL}/api/users`);
       setUsers(res.data);
     } catch (err) {
       console.error("Error fetching users:", err);

@@ -8,6 +8,8 @@ import flowers from '../assets/flowers.png';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiShoppingCart } from "react-icons/fi";
+import BASE_URL from "../api";
+
 
 export default function SearchPage() {
   const location = useLocation();
@@ -27,7 +29,7 @@ export default function SearchPage() {
   const fetchResults = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/cards/search?q=${query}`);
+      const response = await fetch(`${BASE_URL}/api/cards/search?q=${query}`);
       const data = await response.json();
       setResults(data);
       setLoading(false);
