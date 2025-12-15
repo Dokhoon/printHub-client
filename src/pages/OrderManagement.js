@@ -3,6 +3,7 @@ import axios from "axios";
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./OrderManagement.css"; 
+import BASE_URL from "../../api";
 
 export default function OrderManagement() {
   const [orders, setOrders] = useState([]);
@@ -14,7 +15,7 @@ export default function OrderManagement() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/orders");
+      const res = await axios.get(`${BASE_URL}/api/orders`);
       setOrders(res.data);
       console.log(res.data);
     } catch (err) {

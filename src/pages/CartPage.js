@@ -4,6 +4,7 @@ import { removeFromCart, clearCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "./cart.css";
+import BASE_URL from "../../api";
 // import { Link } from "react-router-dom";
 
 export default function CartPage() {
@@ -38,7 +39,7 @@ export default function CartPage() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/orders/order", {
+      const res = await fetch(`${BASE_URL}/api/orders/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

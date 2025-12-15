@@ -7,7 +7,7 @@ import sideCard from '../assets/sideCard.png';
 import './LoginPage.css';
 
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/userSlice"; 
+import { loginUser } from "../redux/userSlice";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -18,31 +18,31 @@ export default function LoginPage() {
 
   // Login function
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const resultAction = await dispatch(loginUser({ email, password }));
+    try {
+      const resultAction = await dispatch(loginUser({ email, password }));
 
-    if (loginUser.fulfilled.match(resultAction)) {
-      const payload = resultAction.payload;
+      if (loginUser.fulfilled.match(resultAction)) {
+        const payload = resultAction.payload;
 
-      // Save user and token to localStorage
-      if (payload.user) localStorage.setItem("user", JSON.stringify(payload.user));
-      if (payload.token) localStorage.setItem("token", payload.token);
+        // Save user and token to localStorage
+        if (payload.user) localStorage.setItem("user", JSON.stringify(payload.user));
+        if (payload.token) localStorage.setItem("token", payload.token);
 
-      // Automatically navigate based on role without showing alert
-      if (payload.user.role === "admin") navigate("/admin");
-      else navigate("/welcome");
+        // Automatically navigate based on role without showing alert
+        if (payload.user.role === "admin") navigate("/admin");
+        else navigate("/welcome");
 
-    } else {
-      // If login failed
-      alert(resultAction.payload?.error || "Login failed");
+      } else {
+        // If login failed
+        alert(resultAction.payload?.error || "Login failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Login failed");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Login failed");
-  }
-};
+  };
 
 
   return (
@@ -52,15 +52,15 @@ export default function LoginPage() {
       <div className="login-left d-flex flex-column justify-content-center align-items-center p-4">
         <div className="login-card shadow-sm">
           <div className="d-flex align-items-center justify-content-center mb-4">
-            <img src={logo} alt="logo" className="logo"/>
+            <img src={logo} alt="logo" className="logo" />
           </div>
 
           <h4 className="text-center mb-3">Login to Your Account</h4>
 
           <form className="px-4 pb-3 w-100" onSubmit={handleLogin}>
             <div className="mb-3">
-              <input 
-                className="form-control" 
+              <input
+                className="form-control"
                 placeholder="Enter your Email"
                 type="email"
                 value={email}
@@ -70,9 +70,9 @@ export default function LoginPage() {
             </div>
 
             <div className="mb-2">
-              <input 
-                type="password" 
-                className="form-control" 
+              <input
+                type="password"
+                className="form-control"
                 placeholder="Enter your Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

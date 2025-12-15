@@ -8,6 +8,8 @@ import logo from '../assets/logo.png';
 import flowers from '../assets/flowers.png';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BASE_URL from "../../api";
+
 
 export default function CardsPage() {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ export default function CardsPage() {
 
   // Fetch cards
   useEffect(() => {
-    fetch("http://localhost:5000/api/cards")
+    fetch(`${BASE_URL}/api/cards`)
       .then(res => res.json())
       .then(data => {
         setCards(data);

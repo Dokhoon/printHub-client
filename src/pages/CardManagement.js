@@ -17,6 +17,9 @@ import {
   FormGroup,
   Label,
 } from "reactstrap";
+import BASE_URL from "../../api";
+
+
 
 export default function CardManagement() {
   const navigate = useNavigate();
@@ -31,7 +34,7 @@ export default function CardManagement() {
   // Fetch all cards
   const fetchCards = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/cards");
+      const res = await fetch(`${BASE_URL}/api/cards`);
       const data = await res.json();
       setCards(data);
 
@@ -125,14 +128,14 @@ if (!editCardData.category || editCardData.category.trim() === "") {
 
     try {
       if (editCardData._id) {
-        await fetch(`http://localhost:5000/api/cards/${editCardData._id}`, {
+        await fetch(`${BASE_URL}/api/cards/${editCardData._id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(fixedData),
         });
         toast.success("Card updated successfully!");
       } else {
-        await fetch("http://localhost:5000/api/cards", {
+        await fetch(`${BASE_URL}/api/cards`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(fixedData),
@@ -153,7 +156,7 @@ if (!editCardData.category || editCardData.category.trim() === "") {
   const deleteCard = async (id) => {
     if (window.confirm("Are you sure you want to delete this card?")) {
       try {
-        await fetch(`http://localhost:5000/api/cards/${id}`, { method: "DELETE" });
+        await fetch(`${BASE_URL}/api/cards/${id}`, { method: "DELETE" });
         toast.success("Card deleted successfully!");
         fetchCards();
       } catch (err) {

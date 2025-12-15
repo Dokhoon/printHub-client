@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { MdDeleteOutline,MdArrowBack  } from "react-icons/md"; 
+import { MdDeleteOutline,MdArrowBack  } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import "./UserManagement.css";
-
-
-
+import BASE_URL from "../../api";
+ 
+ 
+ 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
     const navigate = useNavigate();  
-
+ 
   useEffect(() => {
     fetchUsers();
   }, []);
-
+ 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users");
+const res = axios.get(`${BASE_URL}/api/users`);
       setUsers(res.data);
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -29,11 +30,11 @@ export default function UserManagement() {
       setLoading(false);
     }
   };
-
+ 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/users/${id}`);
+await axios.delete(`${BASE_URL}/api/users/${id}`);
         toast.success("User deleted successfully");
          
         setUsers(users.filter((u) => u._id !== id));
@@ -43,7 +44,7 @@ export default function UserManagement() {
       }
     }
   };
-
+ 
   return (
     <div>
       <ToastContainer position="top-center" />
@@ -63,12 +64,12 @@ export default function UserManagement() {
            
           </button>
         </div>
-
+ 
         <h2 className="mb-4">User Management</h2>
-
+ 
         {loading && <p>Loading users...</p>}
         {error && <p className="text-danger">{error}</p>}
-
+ 
         {!loading && !error && (
           <div className="table-responsive">
             <table className="table table-striped table-hover">
@@ -109,3 +110,5 @@ export default function UserManagement() {
     </div>
   );
 }
+ 
+ 

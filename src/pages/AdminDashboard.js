@@ -3,7 +3,7 @@ import { FaUsers, FaClipboardList, FaRegCreditCard } from "react-icons/fa";
 import axios from "axios";
 import "./AdminDashboard.css";
 import { Link, useNavigate } from "react-router-dom";
-
+import BASE_URL from "../../api";
 
 
 export default function AdminDashboard() {
@@ -14,14 +14,12 @@ export default function AdminDashboard() {
     orders: 0,
   });
 
-
-
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const usersRes = await axios.get("http://localhost:5000/api/users");
-        const cardsRes = await axios.get("http://localhost:5000/api/cards");
-        const ordersRes = await axios.get("http://localhost:5000/api/orders");
+        const usersRes = await axios.get(`${BASE_URL}/api/users`);
+        const cardsRes = await axios.get(`${BASE_URL}/api/cards`);
+        const ordersRes = await axios.get(`${BASE_URL}/api/orders`);
 
         setStats({
           users: usersRes.data.length,
@@ -37,42 +35,33 @@ export default function AdminDashboard() {
   }, []);
 
   const handleLogout = () => {
-
-
     localStorage.removeItem("token");
     navigate("/");
   };
 
-
-
   return (
-
     <div>
-
       <button
         onClick={handleLogout}
         style={{
-          position: "absolute", 
-          top: "15px",         
-          right: "15px",        
+          position: "absolute",
+          top: "15px",
+          right: "15px",
           padding: "8px 16px",
           fontSize: "16px",
-          backgroundColor: "rgba(112, 108, 109, 0.8)",  
+          backgroundColor: "rgba(112, 108, 109, 0.8)",
           color: "#dbccccff",
           border: "none",
           borderRadius: "5px",
           cursor: "pointer",
           transition: "all 0.3s ease",
-          zIndex: 10,          
+          zIndex: 10,
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = 0.8)}
       >
         Logout
       </button>
-
-
-
 
       <div className="dashboard-container">
         <h1 className="dashboard-title">Welcome Admin!</h1>
@@ -93,7 +82,8 @@ export default function AdminDashboard() {
             <FaRegCreditCard size={50} className="card-icon" />
             <h3>Cards Management</h3>
             <p>{stats.cards} Cards</p>
-            <Link to="/admin/card-management" className="btn btn-light mt-2"> Manage
+            <Link to="/admin/card-management" className="btn btn-light mt-2">
+              Manage
             </Link>
           </div>
 
@@ -110,7 +100,4 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
-
 }
-
-
